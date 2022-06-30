@@ -2,9 +2,9 @@ const path = require('path')
 const ESLintWebpackPlugin = require('eslint-webpack-plugin')
 const ReactRefreshPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
 const { merge } = require('webpack-merge')
-const common = require('./webpack.common.js')
-module.exports = merge(common, {
+const common = require('./webpack.common.cjs')
 
+module.exports = merge(common, {
   module: {
     rules: [{
       oneOf: [
