@@ -3,6 +3,8 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import CssMinimizerPlugin from 'css-minimizer-webpack-plugin'
 import ImageMinimizerPlugin from 'image-minimizer-webpack-plugin'
 import { merge } from 'webpack-merge'
+// eslint-disable-next-line import/default
+import CopyPlugin from 'copy-webpack-plugin'
 import common, { __dirname } from './webpack.common.js'
 
 export default merge(common, {
@@ -63,6 +65,17 @@ export default merge(common, {
     new MiniCssExtractPlugin({
       filename: 'static/css/[name].[contenthash:10].css',
       chunkFilename: 'static/css/[name].[contenthash:10].chunk.css',
+    }),
+    new CopyPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, '../public'),
+          to: path.resolve(__dirname, '../dist'),
+          globOptions: {
+            ignore: ['**/index.html'],
+          },
+        },
+      ],
     }),
   ],
   optimization: {
